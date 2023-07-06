@@ -30,8 +30,8 @@ public class WinningRobot extends Robot {
         double closestDistance = Double.MAX_VALUE;
         double closestBearing = 0;
 
-        for (Map.Entry<String, List<Coordinate>> entry : robotMovements.entrySet()) {
-            List<Coordinate> coordinates = entry.getValue();
+        for (String enemyName : robotMovements.keySet()) {
+            List<Coordinate> coordinates = robotMovements.get(enemyName);
             if (coordinates.isEmpty()) {
                 continue;
             }
