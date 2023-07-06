@@ -3,7 +3,7 @@ import robocode.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WinningRobot extends Robot {
+public class MilwaukeeMan extends Robot {
     private static final int MAX_COORDINATES = 100;
     private static final int MIN_COORDINATES = 20;
     private static final double EPSILON = 1e-6;
