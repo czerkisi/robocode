@@ -17,9 +17,80 @@ public class WinningRobot extends Robot {
         robotMovements = new HashMap<>();
 
         while (true) {
-            ahead(100);
+            avoidRobots();
+            avoidWalls();
             turnRadarRight(360);
         }
+    }
+
+    private void avoidRobots() {
+        double safeDistance = 150; // Minimum safe distance from other robots
+
+        // Find the closest robot
+        double closestDistance = Double.MAX_VALUE;
+        double closestBearing = 0;
+
+        for (Map.Entry<String, List<Coordinate>> entry : robotMovements.entrySet()) {
+            List<Coordinate> coordinates = entry.getValue();
+            if (coordinates.isEmpty()) {
+                continue;
+            }
+
+            Coordinate latestCoordinate = coordinates.get(coordinates.size() - 1);
+            double distance = getDistanceBetween(new Coordinate(getX(), getY()), latestCoordinate);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                double deltaX = latestCoordinate.getX() - getX();
+                double deltaY = latestCoordinate.getY() - getY();
+                closestBearing = Math.atan2(deltaX, deltaY);
+            }
+        }
+
+        // Move away from the closest robot if within safe distance
+        if (closestDistance < safeDistance) {
+            double angleToRobot = Math.toDegrees(closestBearing) - getHeading();
+            turnRight(angleToRobot);
+            ahead(safeDistance - closestDistance);
+        }
+    }
+
+    private void avoidWalls() {
+        double wallMargin = 50; // Margin to consider near the wall
+
+        // Check if near a wall
+        if (isNearWall()) {
+            double wallBearing = getBearingToWall();
+            double wallTurn = robocode.util.Utils.normalRelativeAngleDegrees(wallBearing - getHeading());
+
+            if (wallTurn >= 0) {
+                turnRight(wallTurn + 90);
+            } else {
+                turnLeft(Math.abs(wallTurn) + 90);
+            }
+
+            ahead(100);
+        }
+    }
+
+    private boolean isNearWall() {
+        double wallMargin = 50; // Margin to consider near the wall
+        return (getX() <= wallMargin || getY() <= wallMargin || getBattleFieldWidth() - getX() <= wallMargin
+                || getBattleFieldHeight() - getY() <= wallMargin);
+    }
+
+    private double getBearingToWall() {
+        double x = getX();
+        double y = getY();
+        double battlefieldWidth = getBattleFieldWidth();
+        double battlefieldHeight = getBattleFieldHeight();
+
+        double northBearing = Math.toDegrees(Math.atan2(battlefieldHeight - y, x));
+        double southBearing = Math.toDegrees(Math.atan2(-y, x));
+        double eastBearing = Math.toDegrees(Math.atan2(battlefieldWidth - x, y));
+        double westBearing = Math.toDegrees(Math.atan2(x, y));
+
+        double wallBearing = Math.min(Math.min(northBearing, southBearing), Math.min(eastBearing, westBearing));
+        return wallBearing;
     }
 
     private double calculateTimeToHit(double targetX, double targetY) {
