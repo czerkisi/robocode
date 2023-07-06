@@ -633,8 +633,4 @@ public class MilwaukeeMan extends Robot {
             this.averageY = averageY;
         }
     }
-
-    public static void main(String[] args) {
-        // Robot main method for testing the code
-    }
 }
