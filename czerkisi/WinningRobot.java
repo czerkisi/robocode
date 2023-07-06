@@ -269,7 +269,7 @@ public class WinningRobot extends Robot {
             for (int i = 0; i < coordinates.size(); i++) {
                 Coordinate coordinate = coordinates.get(i);
                 Coordinate predictedCoordinate = model.predict(i);
-                error += RegressionModel.calculateError(predictedCoordinate, coordinate);
+                error += model.calculateError(predictedCoordinate, coordinate);
             }
 
             return error;
@@ -281,7 +281,7 @@ public class WinningRobot extends Robot {
             public abstract void train(List<Coordinate> coordinates);
             public abstract Coordinate predict(int n);
 
-            protected static double calculateError(Coordinate predictedCoordinate, Coordinate actualCoordinate) {
+            protected double calculateError(Coordinate predictedCoordinate, Coordinate actualCoordinate) {
                 double xDiff = actualCoordinate.getX() - predictedCoordinate.getX();
                 double yDiff = actualCoordinate.getY() - predictedCoordinate.getY();
 
