@@ -15,6 +15,7 @@ public class MilwaukeeMan extends Robot {
         enemyRobots = new ArrayList<>();
 
         while (true) {
+            System.out.println("running");
             avoidRobots();
             avoidWalls();
             turnRadarRight(360);
@@ -180,8 +181,10 @@ public class MilwaukeeMan extends Robot {
         }
 
         enemy.addCoordinate(new Coordinate(enemyX, enemyY));
+        System.out.println("coordinates size: " + enemy.getCoordinates().size());
 
         if (enemy.getCoordinates().size() >= MIN_COORDINATES) {
+            System.out.println("determining action");
             determineAction(enemy);
         }
     }
