@@ -47,23 +47,10 @@ public class Roboken2 extends Robot {
             turnRight(turnAngle);
         }
 
-        // if (enemyDistance < 100 && enemyDistance > 50) {
-        //     turnGunRight(Math.toDegrees(gunTurnAngle));
-        //     fire(3);
-        // }
-
-	if(enemyDistance > 600 && enemyDistance <= 800)
-	   turnGunRight(Math.toDegrees(gunTurnAngle));
-	   fire(4);
-        else if(enemyDistance > 400 && enemyDistance <= 600)
-	   turnGunRight(Math.toDegrees(gunTurnAngle));
-	   fire(3);
-        else if(enemyDistance > 200 && enemyDistance <= 400)
-	   turnGunRight(Math.toDegrees(gunTurnAngle));
-	   fire(2);
-	else if(enemyDistance < 200 && enemyDistance > 100)
-	   turnGunRight(Math.toDegrees(gunTurnAngle));
-	   fire(1);
+        if (enemyDistance < 100 && enemyDistance > 50) {
+            turnGunRight(Math.toDegrees(gunTurnAngle));
+            fire(3);
+        }
     }
 
     public void onHitByBullet(HitByBulletEvent event) {
