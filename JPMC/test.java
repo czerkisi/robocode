@@ -3,7 +3,7 @@ package JPMC;
 import robocode.Robot;
 import robocode.ScannedRobotEvent;
 
-public class Roboken2 extends Robot {
+public class EscapeRobot extends Robot {
 
     public void run() {
         while (true) {
