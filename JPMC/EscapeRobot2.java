@@ -6,8 +6,11 @@ import robocode.ScannedRobotEvent;
 public class EscapeRobot extends Robot {
 
     public void run() {
+        foundRobot = false;
         while (true) {
-            turnRadarRight(360);
+            while (!foundRobot){
+                turnRadarRight(5);
+            }
         }
     }
 
