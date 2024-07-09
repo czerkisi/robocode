@@ -48,7 +48,7 @@ public class EscapeRobot extends Robot {
             turnRight(turnAngle);
         }
 
-        if (enemyDistance < 100) {
+        if (enemyDistance < 100 && enemyDistance > 50) {
             turnGunRight(Math.toDegrees(gunTurnAngle));
             fire(3);
         }
