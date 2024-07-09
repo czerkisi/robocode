@@ -1,11 +1,10 @@
-package robot;
+package robot; 
 
-import robocode.Robot;
-import robocode.ScannedRobotEvent;
+import robocode.*;
 
-public class EscapeRobot extends Robot {
-    private boolean foundRobot;
-    public void run() {
+public class Roboken2 extends Robot {
+	private boolean foundRobot;
+	public void run() {
         foundRobot = false;
         while (true) {
             while (!foundRobot){
