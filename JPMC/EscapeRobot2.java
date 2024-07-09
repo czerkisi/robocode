@@ -4,7 +4,7 @@ import robocode.Robot;
 import robocode.ScannedRobotEvent;
 
 public class EscapeRobot extends Robot {
-
+    private boolean foundRobot;
     public void run() {
         foundRobot = false;
         while (true) {
