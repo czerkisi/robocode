@@ -51,12 +51,20 @@ public class EscapeRobot extends Robot {
         }
     }
 
-    public void onHitByBullet(HitByBulletEvent event){
-
+    public void onHitByBullet(HitByBulletEvent event) {
+        double bulletBearing = event.getBearing();
+        // Turn perpendicular to the bullet direction to avoid further hits
+        turnRight(-bulletBearing + 90);
+        // Move ahead to evade
+        ahead(100);
     }
 
-    public void onHitWall(HitWallEvent event){
-
+    public void onHitWall(HitWallEvent event) {
+        double bearing = event.getBearing();
+        // Turn away from the wall
+        turnRight(-bearing);
+        // Move away from the wall
+        ahead(100);
     }
 
     private double[] calculateEscapeVector(double enemyBearing, double robotHeading, double enemyDistance,

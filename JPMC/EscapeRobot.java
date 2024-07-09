@@ -12,6 +12,7 @@ public class EscapeRobot extends Robot {
     }
 
     public void onScannedRobot(ScannedRobotEvent event) {
+        
         double enemyBearing = event.getBearingRadians();
         double robotHeading = Math.toRadians(getHeading());
         double enemyDistance = event.getDistance();
